@@ -1,37 +1,51 @@
 import React from "react";
-import { Container, Box } from "@mui/system";
-import { List, ListItem, ListItemText, Typography } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  Card,
+  CardContent,
+  CardHeader,
+} from "@mui/material";
 
 const PlayerUI = ({ user }) => {
   return (
-    <Container sx={{ marginTop: "30px" }}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          backgroundColor: "",
-        }}
-      >
-        <Typography component="p" sx={{ fontWeight: "600" }}>
-          Nombre: <Typography component="span">{user.user}</Typography>
+    <Card
+      sx={{
+        width: "500px",
+        marginY: "20px",
+        backgroundColor: "dark.secondary",
+        color: "white",
+      }}
+      variant="outlined"
+    >
+      <CardHeader title={user.user} />
+      <CardContent>
+        <Typography
+          component="p"
+          sx={{ fontWeight: "600", color: "primary.main" }}
+        >
+          Puntos:{" "}
+          <Typography component="span" sx={{ color: "light.main" }}>
+            {user.points}
+          </Typography>
         </Typography>
-
-        <Typography component="p" sx={{ fontWeight: "600" }}>
-          Puntos: <Typography component="span">{user.points}</Typography>
-        </Typography>
-        <List>
-          <Typography component="p" sx={{ fontWeight: "600", marginY: "10px" }}>
+        <List sx={{ display: "flex" }}>
+          <Typography
+            component="p"
+            sx={{ fontWeight: "600", marginY: "10px", color: "primary.main" }}
+          >
             Apuestas:
           </Typography>
-          {user.bets.map((bet, index) => (
+          {user.bets.map((betObject, index) => (
             <ListItem key={`bet-${index + 1}`}>
-              <ListItemText>${bet}</ListItemText>
+              <ListItemText>${betObject.bet}</ListItemText>
             </ListItem>
           ))}
         </List>
-      </Box>
-    </Container>
+      </CardContent>
+    </Card>
   );
 };
 

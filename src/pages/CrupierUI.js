@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 const CrupierUI = () => {
-  const { users, handleUsers } = useContext(AppContext);
+  const { users, handleUsers, saveUsers } = useContext(AppContext);
   const [currentUser, setCurrentUser] = useState({});
   const [bet, setBet] = useState(0);
 
@@ -19,23 +19,38 @@ const CrupierUI = () => {
   };
 
   const handleBetting = (user, betValue) => {
+    const date = new Date();
+    const hours = date.getHours();
+    const day = date.getDate();
     // Search for the user in the users array
     const foundUser = users.find(
       (usr) => usr.user?.toLowerCase() === user.toLowerCase()
     );
     // If found, add the user's bet
     if (!foundUser) {
-      handleUsers([...users, { user: user, points: 1000, bets: [betValue] }]);
+      handleUsers([
+        ...users,
+        {
+          user: user,
+          points: 1000,
+          bets: [{ day: day, hours: hours, bet: betValue }],
+        },
+      ]);
     } else {
       // If not found, filter old users
       const oldUsers = users.filter(
         (usr) => usr.user?.toLowerCase() !== user.toLowerCase()
       );
       // Add the new user with the bet
-      const newUser = { ...foundUser, bets: [...foundUser.bets, betValue] };
+      const newUser = {
+        ...foundUser,
+        bets: [...foundUser.bets, { day: day, hours: hours, bet: betValue }],
+      };
       // Update the users array
       handleUsers([...oldUsers, newUser]);
     }
+    // Save in local storage
+    saveUsers(users);
   };
 
   return (
@@ -78,7 +93,7 @@ const CrupierUI = () => {
           <InputLabel
             htmlFor="bet-label"
             color="secondary"
-            onChange={(e) => handleBet(e.target.value)}
+            onChange={(e) => handleBet(Number(e.target.value))}
           >
             Apuesta
           </InputLabel>
@@ -86,7 +101,7 @@ const CrupierUI = () => {
             id="bet-label"
             type="number"
             onChange={(e) => {
-              if (Number(e.target.value) > 0) handleBet(e.target.value);
+              if (Number(e.target.value) > 0) handleBet(Number(e.target.value));
             }}
           />
         </FormControl>

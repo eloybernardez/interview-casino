@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Container, Box, Typography } from "@mui/material";
+import { Container, Box, Typography, Grid } from "@mui/material";
 import PlayerList from "./PlayerList";
 import PlayerUI from "../pages/PlayerUI";
 import AppContext from "../context/AppContext";
@@ -7,19 +7,21 @@ import AppContext from "../context/AppContext";
 const Layout = () => {
   const { users } = useContext(AppContext);
   return (
-    <Container sx={{ marginTop: "30px" }}>
+    <Container sx={{ paddingTop: "70px" }}>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: "100%",
+          display: "grid",
+          placeItems: "center",
         }}
       >
-        <Typography variant="h3">Jugadores</Typography>
+        <Typography variant="h3" sx={{ textAlign: "center" }}>
+          Jugadores
+        </Typography>
         <PlayerList>
           {users.map((user, index) => (
-            <PlayerUI user={user} key={`user-${index}`} />
+            <Grid item key={`user-${index + 1}`}>
+              <PlayerUI user={user} />
+            </Grid>
           ))}
         </PlayerList>
       </Box>

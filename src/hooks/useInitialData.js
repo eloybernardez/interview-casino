@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const initialContext = {
   management: [
@@ -6,21 +6,51 @@ const initialContext = {
     { user: "manager", pass: "managerpass" },
   ],
   users: [
-    { user: "Carlos", bets: [500, 250], points: 1250 },
-    { user: "Juan", bets: [1000, 2500], points: 4000 },
-    { user: "Pedro", bets: [100, 150], points: 552 },
+    {
+      user: "Carlos",
+      bets: [
+        { day: 17, hours: 10, bet: 500 },
+        { day: 17, hours: 11, bet: 250 },
+      ],
+      points: 1250,
+    },
+    {
+      user: "Juan",
+      bets: [
+        { day: 10, hours: 14, bet: 1000 },
+        { day: 26, hours: 22, bet: 2500 },
+      ],
+      points: 4000,
+    },
+    {
+      user: "Pedro",
+      bets: [
+        { day: 8, hours: 13, bet: 100 },
+        { day: 1, hours: 19, bet: 150 },
+      ],
+      points: 552,
+    },
   ],
 };
 
+const saveUsers = (users) => {
+  window.localStorage.setItem("users", JSON.stringify(users));
+};
+
+const getUsers = () => {
+  const usersStoraged = window.localStorage.getItem("users");
+  return usersStoraged ? JSON.parse(usersStoraged) : initialContext.users;
+};
+
 const useInitialData = () => {
-  const [users, setUsers] = useState(initialContext.users);
+  const [users, setUsers] = useState(getUsers());
   const management = initialContext.management;
 
   const handleUsers = (newUsers) => {
     setUsers(newUsers);
   };
 
-  return { users, handleUsers, management };
+  return { users, handleUsers, management, saveUsers };
 };
 
 export default useInitialData;
