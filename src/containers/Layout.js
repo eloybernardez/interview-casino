@@ -7,7 +7,7 @@ import AppContext from "../context/AppContext";
 const Layout = () => {
   const { users } = useContext(AppContext);
   return (
-    <Container maxWidth="md">
+    <Container sx={{ marginTop: "30px" }}>
       <Box
         sx={{
           display: "flex",
@@ -16,6 +16,7 @@ const Layout = () => {
           height: "100%",
         }}
       >
+        <Typography variant="h3">Jugadores</Typography>
         <PlayerList>
           {users.map((user, index) => (
             <PlayerUI user={user} key={`user-${index}`} />

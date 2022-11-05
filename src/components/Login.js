@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import AppContext from "../context/AppContext";
 import { Container } from "@mui/system";
-import { Button } from "@mui/material";
+import { Button, ButtonGroup, Typography } from "@mui/material";
 import { Input } from "@mui/material";
 import { Link } from "react-router-dom";
 import { InputLabel, FormControl } from "@mui/material";
@@ -32,9 +32,21 @@ const Login = () => {
   }
 
   return (
-    <Container sx={{ display: "flex", flexDirection: "column" }}>
-      <FormControl error={error}>
-        <InputLabel htmlFor="user">Usuario</InputLabel>
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        marginTop: "35px",
+        justifyContent: "space-evenly",
+        height: "500px",
+      }}
+    >
+      <Typography variant="h3">Acceso trabajadores</Typography>
+      <FormControl error={error} color="secondary">
+        <InputLabel htmlFor="user" color="secondary">
+          Usuario
+        </InputLabel>
         <Input
           id="user"
           type="text"
@@ -42,8 +54,10 @@ const Login = () => {
           onChange={(e) => setUser(e.target.value)}
         />
       </FormControl>
-      <FormControl error={error} sx={{ marginTop: "10px" }}>
-        <InputLabel htmlFor="pass">Contraseña</InputLabel>
+      <FormControl error={error} sx={{ marginTop: "10px" }} color="secondary">
+        <InputLabel htmlFor="pass" color="secondary">
+          Contraseña
+        </InputLabel>
         <Input
           id="pass"
           type="password"
@@ -51,45 +65,47 @@ const Login = () => {
           onChange={(e) => setPass(e.target.value)}
         />
       </FormControl>
-      <Button
-        color="success"
-        endIcon={<LoginIcon />}
-        variant="contained"
-        sx={{ marginTop: "10px" }}
-        type="button"
-        onClick={(e) => {
-          if (!currentManagement) e.preventDefault();
-          validateLogin(management, user, pass);
-        }}
-      >
-        Acceso al sistema
-      </Button>
-      {currentManagement === "crupier" && (
+      <ButtonGroup sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
-          component={Link}
-          color="info"
-          endIcon={<CasinoIcon />}
+          color="primary"
+          endIcon={<LoginIcon />}
           variant="contained"
           sx={{ marginTop: "10px" }}
           type="button"
-          to="/crupier"
+          onClick={(e) => {
+            if (!currentManagement) e.preventDefault();
+            validateLogin(management, user, pass);
+          }}
         >
-          Acceso Crupier
+          Acceso al sistema
         </Button>
-      )}
-      {currentManagement === "manager" && (
-        <Button
-          component={Link}
-          color="warning"
-          endIcon={<AdminPanelSettingsIcon />}
-          variant="contained"
-          sx={{ marginTop: "10px" }}
-          type="button"
-          to="/manager"
-        >
-          Acceso Manager
-        </Button>
-      )}
+        {currentManagement === "crupier" && (
+          <Button
+            component={Link}
+            color="info"
+            endIcon={<CasinoIcon />}
+            variant="contained"
+            sx={{ marginTop: "10px" }}
+            type="button"
+            to="/crupier"
+          >
+            Acceso Crupier
+          </Button>
+        )}
+        {currentManagement === "manager" && (
+          <Button
+            component={Link}
+            color="warning"
+            endIcon={<AdminPanelSettingsIcon />}
+            variant="contained"
+            sx={{ marginTop: "10px" }}
+            type="button"
+            to="/manager"
+          >
+            Acceso Manager
+          </Button>
+        )}
+      </ButtonGroup>
     </Container>
   );
 };

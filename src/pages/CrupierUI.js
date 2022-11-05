@@ -19,37 +19,65 @@ const CrupierUI = () => {
   };
 
   const handleBetting = (user, betValue) => {
+    // Search for the user in the users array
     const foundUser = users.find(
       (usr) => usr.user?.toLowerCase() === user.toLowerCase()
     );
+    // If found, add the user's bet
     if (!foundUser) {
       handleUsers([...users, { user: user, points: 1000, bets: [betValue] }]);
     } else {
+      // If not found, filter old users
       const oldUsers = users.filter(
         (usr) => usr.user?.toLowerCase() !== user.toLowerCase()
       );
+      // Add the new user with the bet
       const newUser = { ...foundUser, bets: [...foundUser.bets, betValue] };
+      // Update the users array
       handleUsers([...oldUsers, newUser]);
     }
   };
-  console.log(users);
+
   return (
-    <Container>
-      <Typography component="h2" variant="h3" sx={{ marginBottom: "10px" }}>
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        marginTop: "30px",
+        justifyContent: "space-evenly",
+        height: "500px",
+      }}
+    >
+      <Typography
+        component="h2"
+        variant="h3"
+        sx={{ marginBottom: "10px", fontWeight: "600" }}
+      >
         Crupier
       </Typography>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <FormControl sx={{ marginBottom: "10px" }}>
-          <InputLabel htmlFor="user-label">Usuario</InputLabel>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignContent: "center",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <FormControl sx={{ marginBottom: "20px" }} color="secondary">
+          <InputLabel htmlFor="user-label" color="secondary">
+            Usuario
+          </InputLabel>
           <Input
             id="user-label"
             type="text"
             onChange={(e) => setCurrentUser(e.target.value)}
           />
         </FormControl>
-        <FormControl sx={{ marginBottom: "10px" }}>
+        <FormControl sx={{ marginBottom: "20px" }} color="secondary">
           <InputLabel
             htmlFor="bet-label"
+            color="secondary"
             onChange={(e) => handleBet(e.target.value)}
           >
             Apuesta
@@ -64,7 +92,8 @@ const CrupierUI = () => {
         </FormControl>
         <Button
           variant="contained"
-          color="success"
+          color="primary"
+          sx={{ marginTop: "20px" }}
           onClick={() => {
             handleBetting(currentUser, bet);
           }}
