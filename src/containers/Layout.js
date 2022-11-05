@@ -19,7 +19,7 @@ const Layout = () => {
         </Typography>
         <PlayerList>
           {users.map((user, index) => (
-            <Grid item key={`user-${index + 1}`}>
+            <Grid item xs={12} md={6} key={`user-${index + 1}`}>
               <PlayerUI user={user} />
             </Grid>
           ))}

@@ -13,7 +13,7 @@ const PlayerUI = ({ user }) => {
   return (
     <Card
       sx={{
-        width: "500px",
+        width: "450px",
         marginY: "20px",
         backgroundColor: "dark.secondary",
         color: "white",
