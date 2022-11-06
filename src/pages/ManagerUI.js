@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Container, Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import AppContext from "../context/AppContext";
 import PlayerList from "../containers/PlayerList";
@@ -55,8 +55,7 @@ const ManagerUI = () => {
           variant="h6"
           sx={{ textAlign: "center", color: "secondary.main" }}
         >
-          Apuestas desde {day - 1}/{date.getMonth() + 1} 7am a {day}/
-          {date.getMonth() + 1} 7am
+          Apuestas desde ayer 7am hasta hoy a las 7am
           <Typography variant="h6" sx={{ color: "dark.main" }}>
             ${sumBets(users)}
           </Typography>
