@@ -20,6 +20,9 @@ const CrupierUI = () => {
 
   const handleBetting = (user, betValue) => {
     const date = new Date();
+    const fullDate = `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()}`;
     const hours = date.getHours();
     const day = date.getDate();
     // Search for the user in the users array
@@ -33,7 +36,7 @@ const CrupierUI = () => {
         {
           user: user,
           points: 1000,
-          bets: [{ day: day, hours: hours, bet: betValue }],
+          bets: [{ day: day, hours: hours, date: fullDate, bet: betValue }],
         },
       ]);
     } else {
@@ -44,7 +47,10 @@ const CrupierUI = () => {
       // Add the new user with the bet
       const newUser = {
         ...foundUser,
-        bets: [...foundUser.bets, { day: day, hours: hours, bet: betValue }],
+        bets: [
+          ...foundUser.bets,
+          { day: day, hours: hours, date: fullDate, bet: betValue },
+        ],
       };
       // Update the users array
       handleUsers([...oldUsers, newUser]);

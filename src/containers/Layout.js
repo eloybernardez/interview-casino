@@ -7,25 +7,31 @@ import AppContext from "../context/AppContext";
 const Layout = () => {
   const { users } = useContext(AppContext);
   return (
-    <Container sx={{ paddingTop: "70px" }}>
-      <Box
-        sx={{
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
+    <Grid container spacing={2} sx={{ marginTop: "70px" }}>
+      <Grid item xs={12} sm={12}>
         <Typography variant="h3" sx={{ textAlign: "center" }}>
           Jugadores
         </Typography>
+      </Grid>
+
+      <Grid item sm={12}>
         <PlayerList>
           {users.map((user, index) => (
-            <Grid item xs={12} md={6} key={`user-${index + 1}`}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={6}
+              xl={6}
+              key={`user-${index + 1}`}
+            >
               <PlayerUI user={user} />
             </Grid>
           ))}
         </PlayerList>
-      </Box>
-    </Container>
+      </Grid>
+    </Grid>
   );
 };
 

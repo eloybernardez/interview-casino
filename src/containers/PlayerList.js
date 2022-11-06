@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 
 const PlayerList = ({ children }) => {
   return (
-    <Grid container spacing={2} sx={{ justifyContent: "center" }}>
+    <Grid container sm={12} spacing={2} sx={{ placeItems: "center" }}>
       {children}
     </Grid>
   );

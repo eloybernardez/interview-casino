@@ -31,55 +31,56 @@ const ManagerUI = () => {
     users.reduce((acc, user) => acc + betsAccumulation(user), 0);
 
   return (
-    <Container sx={{ paddingTop: "70px" }}>
-      <Box
-        sx={{
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
+    <Grid container spacing={2} sx={{ marginTop: "70px" }}>
+      <Grid item xs={12} sm={12}>
         <Typography variant="h3" sx={{ textAlign: "center" }}>
           Manager
         </Typography>
-        <Container
-          sx={{
-            display: "flex",
-            justifyContent: "space-around",
-            marginTop: "20px",
-          }}
-        >
-          <Typography variant="h4" sx={{ textAlign: "center" }}>
-            <Typography
-              component="span"
-              variant="h4"
-              sx={{ color: "secondary.main" }}
-            >
-              {users.length}
-            </Typography>{" "}
-            jugadores
-          </Typography>
+      </Grid>
+      <Grid item xs={12} sm={12}>
+        <Typography variant="h4" sx={{ textAlign: "center" }}>
           <Typography
             component="span"
-            variant="h6"
-            sx={{ textAlign: "center", color: "secondary.main" }}
+            variant="h4"
+            sx={{ color: "secondary.main" }}
           >
-            Apuestas desde {day - 1}/{date.getMonth()} 7am a {day}/
-            {date.getMonth()} 7am :
-            <Typography variant="h6" sx={{ color: "dark.main" }}>
-              ${sumBets(users)}
-            </Typography>
-          </Typography>
-        </Container>
+            {users.length}
+          </Typography>{" "}
+          jugadores
+        </Typography>
+      </Grid>
 
+      <Grid item xs={12} sm={12}>
+        <Typography
+          variant="h6"
+          sx={{ textAlign: "center", color: "secondary.main" }}
+        >
+          Apuestas desde {day - 1}/{date.getMonth() + 1} 7am a {day}/
+          {date.getMonth() + 1} 7am
+          <Typography variant="h6" sx={{ color: "dark.main" }}>
+            ${sumBets(users)}
+          </Typography>
+        </Typography>
+      </Grid>
+
+      <Grid item sm={12}>
         <PlayerList>
           {users.map((user, index) => (
-            <Grid item xs={12} md={6} key={`user-${index + 1}`}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={6}
+              xl={6}
+              key={`user-${index + 1}`}
+            >
               <PlayerUI user={user} />
             </Grid>
           ))}
         </PlayerList>
-      </Box>
-    </Container>
+      </Grid>
+    </Grid>
   );
 };
 

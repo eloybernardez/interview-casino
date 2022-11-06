@@ -70,7 +70,7 @@ const Login = () => {
           color="primary"
           endIcon={<LoginIcon />}
           variant="contained"
-          sx={{ marginTop: "10px" }}
+          sx={{ marginTop: "10px", marginRight: "10px" }}
           type="button"
           onClick={(e) => {
             if (!currentManagement) e.preventDefault();

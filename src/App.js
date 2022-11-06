@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import { Button, Container, Box, AppBar, Toolbar } from "@mui/material";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { yellow } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AppContext from "./context/AppContext";
@@ -8,16 +7,15 @@ import Layout from "./containers/Layout";
 import CrupierUI from "./pages/CrupierUI";
 import ManagerUI from "./pages/ManagerUI";
 import useInitialData from "./hooks/useInitialData";
+import Header from "./components/Header";
 import "./styles/App.css";
 
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: yellow[500],
     },
     secondary: {
-      // This is green.A700 as hex.
       main: "#2b2f71",
     },
     dark: {
@@ -38,40 +36,7 @@ function App() {
     <AppContext.Provider value={{ users, management, handleUsers, saveUsers }}>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <AppBar color="dark">
-            <Toolbar
-              sx={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Box sx={{ width: "30px", height: "30px" }}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/7399/7399022.png"
-                  alt="New Vegas Casino logo"
-                  style={{ width: "100%", height: "100%" }}
-                />
-              </Box>
-
-              <Container sx={{ display: "flex", justifyContent: "flex-end" }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignContent: "center",
-                  }}
-                >
-                  <Button component={Link} to="/" variant="text">
-                    Inicio
-                  </Button>
-                  <Button component={Link} to="/login" variant="text">
-                    Login de trabajadores
-                  </Button>
-                </Box>
-              </Container>
-            </Toolbar>
-          </AppBar>
-
+          <Header />
           <Routes>
             <Route path="/" element={<Layout />} />
             <Route exact path="/login" element={<Login />} />
