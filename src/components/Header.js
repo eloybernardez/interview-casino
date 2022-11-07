@@ -18,7 +18,13 @@ const Header = () => {
           alignItems: "center",
         }}
       >
-        <Box sx={{ width: "50px", height: "30px" }}>
+        <Box
+          sx={{
+            width: "70px",
+            height: "50px",
+            "@media (max-width: 600px)": { width: "40px", height: "40px" },
+          }}
+        >
           <img
             src="https://cdn-icons-png.flaticon.com/512/7399/7399022.png"
             alt="New Vegas Casino logo"
@@ -28,8 +34,13 @@ const Header = () => {
         <Typography
           color="primary"
           component="span"
-          variant="h6"
-          sx={{ marginLeft: "10px", width: "100%" }}
+          sx={{
+            marginLeft: "10px",
+            width: "100%",
+            fontFamily: "Archivo",
+            fontWeight: "300",
+            "@media (max-width: 600px)": { display: "none" },
+          }}
         >
           N.V. Casino
         </Typography>
@@ -41,11 +52,21 @@ const Header = () => {
               alignContent: "center",
             }}
           >
-            <Button component={Link} to="/" variant="text">
+            <Button
+              component={Link}
+              to="/"
+              variant="outlined"
+              sx={{ marginRight: "10px", marginY: "5px" }}
+            >
               Inicio
             </Button>
-            <Button component={Link} to="/login" variant="text">
-              Login de trabajadores
+            <Button
+              component={Link}
+              to="/login"
+              variant="outlined"
+              sx={{ marginY: "5px" }}
+            >
+              Trabajadores
             </Button>
           </Box>
         </Container>

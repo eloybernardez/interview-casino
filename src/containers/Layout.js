@@ -9,7 +9,10 @@ const Layout = () => {
   return (
     <Grid container spacing={2} sx={{ marginTop: "70px" }}>
       <Grid item xs={12} sm={12}>
-        <Typography variant="h3" sx={{ textAlign: "center" }}>
+        <Typography
+          variant="h3"
+          sx={{ textAlign: "center", fontFamily: "Archivo", fontWeight: "600" }}
+        >
           Jugadores
         </Typography>
       </Grid>

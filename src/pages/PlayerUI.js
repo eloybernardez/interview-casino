@@ -23,37 +23,65 @@ const PlayerUI = ({ user }) => {
       }}
       variant="outlined"
     >
-      <CardHeader title={user.user} />
+      <CardHeader title={user.user} sx={{ fontFamily: "Archivo" }} />
       <CardContent>
         <Typography
           component="p"
-          sx={{ fontWeight: "600", color: "primary.main" }}
+          sx={{
+            fontWeight: "600",
+            color: "primary.main",
+            fontFamily: "Archivo",
+          }}
         >
           Puntos:{" "}
           <Typography component="span" sx={{ color: "light.main" }}>
             {user.points}
           </Typography>
         </Typography>
-        <Typography
-          component="p"
-          sx={{
-            fontWeight: "600",
-            marginY: "10px",
-            color: "primary.main",
-            textAlign: "center",
-          }}
-        >
-          Apuestas
-        </Typography>
+
         <TableContainer>
+          <Typography
+            component="p"
+            sx={{
+              fontWeight: "600",
+              marginY: "10px",
+              color: "primary.main",
+              textAlign: "center",
+              fontFamily: "Archivo",
+            }}
+          >
+            Apuestas
+          </Typography>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ color: "primary.main" }}>Índice</TableCell>
-                <TableCell sx={{ color: "primary.main" }} align="right">
+                <TableCell
+                  sx={{
+                    color: "primary.main",
+                    fontFamily: "Archivo",
+                    fontWeight: "600",
+                  }}
+                >
+                  Índice
+                </TableCell>
+                <TableCell
+                  sx={{
+                    color: "primary.main",
+                    fontFamily: "Archivo",
+                    fontWeight: "600",
+                  }}
+                  align="right"
+                >
                   Monto
                 </TableCell>
-                <TableCell sx={{ color: "primary.main" }} align="right">
+                <TableCell
+                  sx={{
+                    color: "primary.main",
+                    fontFamily: "Archivo",
+                    fontWeight: "600",
+                  }}
+                  align="right"
+                >
                   Fecha
                 </TableCell>
               </TableRow>

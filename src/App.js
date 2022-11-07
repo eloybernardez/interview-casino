@@ -8,7 +8,7 @@ import CrupierUI from "./pages/CrupierUI";
 import ManagerUI from "./pages/ManagerUI";
 import useInitialData from "./hooks/useInitialData";
 import Header from "./components/Header";
-import "./styles/App.css";
+import "@fontsource/archivo";
 
 const theme = createTheme({
   palette: {

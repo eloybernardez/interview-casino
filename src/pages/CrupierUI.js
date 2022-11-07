@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
-import AppContext from "../context/AppContext";
-import { Container, Box } from "@mui/system";
+import React, { useState } from "react";
+import { Container } from "@mui/system";
 import {
   Input,
   FormControl,
@@ -8,55 +7,15 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import useCrupierLogic from "../hooks/useCrupierLogic";
 
 const CrupierUI = () => {
-  const { users, handleUsers, saveUsers } = useContext(AppContext);
   const [currentUser, setCurrentUser] = useState({});
   const [bet, setBet] = useState(0);
+  const { handleBetting } = useCrupierLogic();
 
   const handleBet = (betValue) => {
     setBet(betValue);
-  };
-
-  const handleBetting = (user, betValue) => {
-    const date = new Date();
-    const fullDate = `${date.getDate()}/${
-      date.getMonth() + 1
-    }/${date.getFullYear()}`;
-    const hours = date.getHours();
-    const day = date.getDate();
-    // Search for the user in the users array
-    const foundUser = users.find(
-      (usr) => usr.user?.toLowerCase() === user.toLowerCase()
-    );
-    // If found, add the user's bet
-    if (!foundUser) {
-      handleUsers([
-        ...users,
-        {
-          user: user,
-          points: 1000,
-          bets: [{ day: day, hours: hours, date: fullDate, bet: betValue }],
-        },
-      ]);
-    } else {
-      // If not found, filter old users
-      const oldUsers = users.filter(
-        (usr) => usr.user?.toLowerCase() !== user.toLowerCase()
-      );
-      // Add the new user with the bet
-      const newUser = {
-        ...foundUser,
-        bets: [
-          ...foundUser.bets,
-          { day: day, hours: hours, date: fullDate, bet: betValue },
-        ],
-      };
-      // Update the users array
-      handleUsers([...oldUsers, newUser]);
-    }
-    // Save in local storage
-    saveUsers(users);
   };
 
   return (
@@ -65,63 +24,51 @@ const CrupierUI = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        marginTop: "30px",
         justifyContent: "space-evenly",
+        marginTop: "35px",
         height: "500px",
       }}
     >
       <Typography
         component="h2"
         variant="h3"
-        sx={{ marginBottom: "10px", fontWeight: "600" }}
+        sx={{ fontWeight: "600", fontFamily: "Archivo" }}
       >
         Crupier
       </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignContent: "center",
-          justifyContent: "space-evenly",
+
+      <FormControl color="secondary">
+        <InputLabel htmlFor="user-label" color="secondary">
+          Usuario
+        </InputLabel>
+        <Input
+          id="user-label"
+          type="text"
+          onChange={(e) => setCurrentUser(e.target.value)}
+        />
+      </FormControl>
+      <FormControl sx={{ marginY: "20px" }} color="secondary">
+        <InputLabel htmlFor="bet-label" color="secondary">
+          Apuesta
+        </InputLabel>
+        <Input
+          id="bet-label"
+          type="number"
+          onChange={(e) => {
+            if (Number(e.target.value) > 0) handleBet(Number(e.target.value));
+          }}
+        />
+      </FormControl>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ marginTop: "20px" }}
+        onClick={() => {
+          handleBetting(currentUser, bet);
         }}
       >
-        <FormControl sx={{ marginBottom: "20px" }} color="secondary">
-          <InputLabel htmlFor="user-label" color="secondary">
-            Usuario
-          </InputLabel>
-          <Input
-            id="user-label"
-            type="text"
-            onChange={(e) => setCurrentUser(e.target.value)}
-          />
-        </FormControl>
-        <FormControl sx={{ marginBottom: "20px" }} color="secondary">
-          <InputLabel
-            htmlFor="bet-label"
-            color="secondary"
-            onChange={(e) => handleBet(Number(e.target.value))}
-          >
-            Apuesta
-          </InputLabel>
-          <Input
-            id="bet-label"
-            type="number"
-            onChange={(e) => {
-              if (Number(e.target.value) > 0) handleBet(Number(e.target.value));
-            }}
-          />
-        </FormControl>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ marginTop: "20px" }}
-          onClick={() => {
-            handleBetting(currentUser, bet);
-          }}
-        >
-          Apostar
-        </Button>
-      </Box>
+        Apostar
+      </Button>
     </Container>
   );
 };

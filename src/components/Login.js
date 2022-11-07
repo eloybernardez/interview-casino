@@ -42,7 +42,16 @@ const Login = () => {
         height: "500px",
       }}
     >
-      <Typography variant="h3">Acceso trabajadores</Typography>
+      <Typography
+        component="h2"
+        variant="h3"
+        sx={{
+          fontFamily: "Archivo",
+          fontWeight: "600",
+        }}
+      >
+        Acceso trabajadores
+      </Typography>
       <FormControl error={error} color="secondary">
         <InputLabel htmlFor="user" color="secondary">
           Usuario
@@ -54,7 +63,7 @@ const Login = () => {
           onChange={(e) => setUser(e.target.value)}
         />
       </FormControl>
-      <FormControl error={error} sx={{ marginTop: "10px" }} color="secondary">
+      <FormControl error={error} color="secondary">
         <InputLabel htmlFor="pass" color="secondary">
           Contraseña
         </InputLabel>
@@ -65,7 +74,8 @@ const Login = () => {
           onChange={(e) => setPass(e.target.value)}
         />
       </FormControl>
-      <ButtonGroup sx={{ display: "flex", justifyContent: "space-between" }}>
+
+      {!currentManagement && (
         <Button
           color="primary"
           endIcon={<LoginIcon />}
@@ -79,33 +89,33 @@ const Login = () => {
         >
           Acceso al sistema
         </Button>
-        {currentManagement === "crupier" && (
-          <Button
-            component={Link}
-            color="info"
-            endIcon={<CasinoIcon />}
-            variant="contained"
-            sx={{ marginTop: "10px" }}
-            type="button"
-            to="/crupier"
-          >
-            Acceso Crupier
-          </Button>
-        )}
-        {currentManagement === "manager" && (
-          <Button
-            component={Link}
-            color="warning"
-            endIcon={<AdminPanelSettingsIcon />}
-            variant="contained"
-            sx={{ marginTop: "10px" }}
-            type="button"
-            to="/manager"
-          >
-            Acceso Manager
-          </Button>
-        )}
-      </ButtonGroup>
+      )}
+      {currentManagement === "crupier" && (
+        <Button
+          component={Link}
+          color="info"
+          endIcon={<CasinoIcon />}
+          variant="contained"
+          sx={{ marginTop: "10px" }}
+          type="button"
+          to="/crupier"
+        >
+          Acceso Crupier
+        </Button>
+      )}
+      {currentManagement === "manager" && (
+        <Button
+          component={Link}
+          color="warning"
+          endIcon={<AdminPanelSettingsIcon />}
+          variant="contained"
+          sx={{ marginTop: "10px" }}
+          type="button"
+          to="/manager"
+        >
+          Acceso Manager
+        </Button>
+      )}
     </Container>
   );
 };

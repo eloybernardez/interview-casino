@@ -4,36 +4,21 @@ import { Typography } from "@mui/material";
 import AppContext from "../context/AppContext";
 import PlayerList from "../containers/PlayerList";
 import PlayerUI from "../pages/PlayerUI";
+import useManagerLogic from "../hooks/useManagerLogic";
 
 const ManagerUI = () => {
   const { users } = useContext(AppContext);
-  const date = new Date();
-  const day = date.getDate();
-  const betsAccumulation = (user) => {
-    const hours = date.getHours();
-    const hoursDifference = (bet) => Math.abs(bet.hours - hours);
+  const { sumBets } = useManagerLogic();
 
-    // Filter the bets of the current day since 7am to 7am of the next day
-    const sum = user.bets.reduce((acc, bet) => {
-      if (
-        bet.day - day === 0 &&
-        bet.hours >= 7 &&
-        hoursDifference(bet) <= 24 &&
-        hoursDifference(bet) >= 0
-      ) {
-        return acc + bet.bet;
-      }
-    }, 0);
-    return sum || 0;
-  };
-
-  const sumBets = (users) =>
-    users.reduce((acc, user) => acc + betsAccumulation(user), 0);
+  const sum = sumBets(users);
 
   return (
     <Grid container spacing={2} sx={{ marginTop: "70px" }}>
       <Grid item xs={12} sm={12}>
-        <Typography variant="h3" sx={{ textAlign: "center" }}>
+        <Typography
+          variant="h3"
+          sx={{ textAlign: "center", fontFamily: "Archivo", fontWeight: "600" }}
+        >
           Manager
         </Typography>
       </Grid>
@@ -57,7 +42,7 @@ const ManagerUI = () => {
         >
           Apuestas desde ayer 7am hasta hoy a las 7am
           <Typography variant="h6" sx={{ color: "dark.main" }}>
-            ${sumBets(users)}
+            ${sum}
           </Typography>
         </Typography>
       </Grid>
